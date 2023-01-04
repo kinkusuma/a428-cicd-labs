@@ -19,9 +19,13 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
-        stage('Deliver') {
+        stage('Approval') {
             steps {
                 input message: 'Lanjutkan ke tahap Deploy? (Klik "Proceed" untuk melanjutkan)'
+            }
+        }
+        stage('Deliver') {
+            steps {
                 sh './jenkins/scripts/deliver.sh'
                 sh 'sleep 1m'
                 sh './jenkins/scripts/kill.sh'
